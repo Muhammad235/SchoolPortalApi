@@ -1,0 +1,28 @@
+//adim(fixed)
+//username
+//password
+
+
+//admin create student/teacher
+
+//student (oneToOne);
+
+//first name
+//last name
+//student address
+//gender
+//email
+//class
+//password
+//profile image
+
+
+
+
+//teacher
+//first name
+//last name
+//email
+//password
+//class - grade(1, 2, 3, 4, 5, 6)
+
