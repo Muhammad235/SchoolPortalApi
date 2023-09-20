@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class AdminAuthController extends Controller
 {
-    //
+    public function login()
+    {
+        return "admin auth";
+    }
 }
