@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('gender');
             $table->string('class');
-            $table->string('profile_image');
+            $table->string('profile_image')->nullable();
             $table->string('password');
             $table->timestamps();
         });

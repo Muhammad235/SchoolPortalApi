@@ -29,4 +29,13 @@ class AdminAuthController extends Controller
         ]);
 
     }
+
+    // public function logout()
+    // {
+    //     Auth::guard('student')->user()->currentAccessToken()->delete();
+
+    //     return $this->success([
+    //         'message' => 'logged out successfully'
+    //     ]);
+    // }
 }
