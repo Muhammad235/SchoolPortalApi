@@ -2,13 +2,31 @@
 
 namespace App\Http\Controllers\APi\V1\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\AdminloginRequest;
 
 class AdminAuthController extends Controller
 {
-    public function login()
+    public function login(AdminloginRequest $request)
     {
-        return "admin auth";
+        $request->validated($request->all());
+
+        $admin = Admin::where('username', $request->username)->first();
+
+        if (!$admin || !Hash::check($request->password, $admin->password)) {
+           return response()->json([
+                'error' => 'provided credentials are incorrect'
+           ], 401);
+        }
+
+        return response()->json([
+            'admin' => $admin,
+            'token' => $admin->createToken($admin->username)->plainTextToken
+        ]);
+
     }
 }
