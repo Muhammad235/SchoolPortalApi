@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\StudentResource;
 
 class StudentController extends Controller
 {
+    use HttpResponses;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return "student from admin";
+        $allStudent = StudentResource::collection(Student::all());
+
+        return $this->success([
+            'students' => $allStudent
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,9 +36,13 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Student $student)
     {
-        //
+        $student = new StudentResource($student);
+
+        return $this->success([
+            'student' => $student
+        ]);
     }
 
     /**

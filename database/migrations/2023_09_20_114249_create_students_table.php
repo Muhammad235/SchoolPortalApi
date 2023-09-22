@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('address');
             $table->string('gender');
-            $table->string('class');
+            $table->foreignId('student_class_id');
             $table->string('profile_image')->nullable();
             $table->string('password');
             $table->timestamps();

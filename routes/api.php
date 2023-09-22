@@ -29,15 +29,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('admin')->group(function (){
     Route::post('login', [AdminAuthController::class, 'login']);
 
-    // Route::middleware('auth:sanctum')->group(function() {
+    Route::middleware('auth:sanctum')->group(function() {
         Route::apiResource('/student', StudentController::class);
         Route::apiResource('/teacher', TeacherController::class);
-    // });
+    });
 });
 
 
 Route::prefix('portal')->group(function (){
-    Route::post('register', [StudentAuthController::class, 'register']);
+    Route::post('{student}/register', [StudentAuthController::class, 'register']);
     Route::post('login', [StudentAuthController::class, 'login']);
 
     // Route::middleware('auth:sanctum')->group(function() {
