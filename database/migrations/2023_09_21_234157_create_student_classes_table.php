@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('student_classes', function (Blueprint $table) {
             $table->id();
-            $table->string('grade');
+            $table->string('grade')->unique();
             $table->timestamps();
         });
     }

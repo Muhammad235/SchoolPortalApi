@@ -34,16 +34,15 @@ class StudentAuthController extends Controller
         // ]);
 
 
-        // $studentDetails = new StudentResource($student);
-
-        // return $this->success([
-        //     'student' => $studentDetails,
-        //     'token' => $student->createToken($student->first_name)->plainTextToken
-        // ]);
-
         $createStudent = $student->grade()->create($request->validated());
 
-        return new StudentResource($createStudent);
+        $studentDetails = new StudentResource($createStudent);
+
+
+        return $this->success([
+            'student' => $studentDetails,
+            'token' => $createStudent->createToken($createStudent->first_name)->plainTextToken
+        ]);
 
     }
 
@@ -55,12 +54,31 @@ class StudentAuthController extends Controller
             return $this->error("[]", 'Email or password is not correct', 401);
         }
 
-        $student = Student::where('email', $request->email)->first();
+        // try {
+        //     // Attempt to authenticate the student
+        //     if (Auth::guard('student')->attempt($request->only(['email', 'password']))) {
+        //         // Authentication succeeded, retrieve the user's current access token
+        //         $accessToken = Auth::guard('student')->user()->currentAccessToken();
 
-        return $this->success([
-            "student" => $student,
-            "token" => $student->createToken($student->first_name)->plainTextToken,
-          ]);
+        //         // You can now work with $accessToken as needed
+        //         dd($accessToken);
+        //     } else {
+        //         // Authentication failed
+        //         // Handle the case where the credentials are incorrect
+        //         return response()->json(['error' => 'Email or password is not correct'], 401);
+        //     }
+        // } catch (Throwable $th) {
+        //     // Handle any exceptions that may occur
+        //     throw $th;
+        // }
+
+
+        // $student = Student::where('email', $request->email)->first();
+
+        // return $this->success([
+        //     "student" => $student,
+        //     "token" => $student->createToken($student->first_name)->plainTextToken,
+        //   ]);
     }
 
     // public function logout()

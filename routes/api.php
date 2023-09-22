@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\V1\Admin\TeacherController;
 
 use App\Http\Controllers\APi\V1\Auth\AdminAuthController;
 use App\Http\Controllers\APi\V1\Auth\StudentAuthController;
+use App\Http\Controllers\Api\V1\Admin\StudentGradeController;
+use App\Http\Controllers\APi\V1\Student\StudentProfileController;
 
 
 
@@ -32,6 +34,7 @@ Route::prefix('admin')->group(function (){
     Route::middleware('auth:sanctum')->group(function() {
         Route::apiResource('/student', StudentController::class);
         Route::apiResource('/teacher', TeacherController::class);
+        Route::apiResource('/grade', StudentGradeController::class)->only(['store', 'show', 'update', 'destroy']);
     });
 });
 
@@ -41,7 +44,7 @@ Route::prefix('portal')->group(function (){
     Route::post('login', [StudentAuthController::class, 'login']);
 
     // Route::middleware('auth:sanctum')->group(function() {
-        Route::apiResource('/student', StudentController::class);
+        Route::apiResource('/student', StudentProfileController::class)->only(['show', 'update', 'destroy']);
     // });
 });
 
