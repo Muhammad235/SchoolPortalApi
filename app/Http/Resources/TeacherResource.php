@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +15,16 @@ class TeacherResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $studentClass = StudentClass::find($this->student_class_id);
+
+        return [
+            'id' => (string) $this->id,
+            'details' => [
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email' => $this->email,
+                'class_to_teach' => $studentClass->grade,
+            ]
+        ];
     }
 }

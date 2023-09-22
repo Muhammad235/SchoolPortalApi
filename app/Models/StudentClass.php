@@ -27,4 +27,9 @@ class StudentClass extends Model
     }
 
 
+    public function teacher_class()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
 }

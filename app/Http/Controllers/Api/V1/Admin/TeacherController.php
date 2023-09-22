@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\TeacherResource;
 
 class TeacherController extends Controller
 {
@@ -21,12 +24,5 @@ class TeacherController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreTeacherRequest $request)
-    {
-        
-    }
 
 }

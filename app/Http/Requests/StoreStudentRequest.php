@@ -28,7 +28,6 @@ class StoreStudentRequest extends FormRequest
             'email' => ['required', 'string', 'unique:students', 'email'],
             'address' => ['required', 'string'],
             'gender' => ['required'],
-            'class' => ['required'],
             'password' => ['required', 'confirmed', Password::defaults()]
         ];
     }
