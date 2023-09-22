@@ -33,8 +33,8 @@ Route::prefix('admin')->group(function (){
     Route::post('login', [AdminAuthController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function() {
-        Route::apiResource('/student', StudentController::class)->only(['show', 'update', 'destroy']);
-        Route::apiResource('/teacher', TeacherController::class)->only(['show', 'update', 'destroy']);
+        Route::apiResource('/student', StudentController::class)->only(['index', 'show', 'update', 'destroy']);
+        Route::apiResource('/teacher', TeacherController::class)->only(['index', 'show', 'update', 'destroy']);
         Route::post('/teacher/{class_to_teach}', [TeacherAuthController::class, 'store']);
         Route::apiResource('/grade', StudentGradeController::class)->only(['store', 'show', 'update', 'destroy']);
     });
@@ -45,9 +45,9 @@ Route::prefix('portal')->group(function (){
     Route::post('{student}/register', [StudentAuthController::class, 'register']);
     Route::post('login', [StudentAuthController::class, 'login']);
 
-    // Route::middleware('auth:sanctum')->group(function() {
+    Route::middleware('auth:sanctum')->group(function() {
         Route::apiResource('/student', StudentProfileController::class)->only(['show', 'update', 'destroy']);
-    // });
+    });
 });
 
 

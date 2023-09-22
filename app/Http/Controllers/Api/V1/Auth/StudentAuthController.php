@@ -50,9 +50,11 @@ class StudentAuthController extends Controller
     {
         $request->validated($request->all());
 
-        if (!Auth::guard('student')->attempt($request->only(['email', 'password']))) {
-            return $this->error("[]", 'Email or password is not correct', 401);
-        }
+        // dd(Auth::guard('student')->user()->id);
+
+        // if (!Auth::guard('student')->attempt($request->only(['email', 'password']))) {
+        //     return $this->error("[]", 'Email or password is not correct', 401);
+        // }
 
         // try {
         //     // Attempt to authenticate the student
@@ -62,6 +64,7 @@ class StudentAuthController extends Controller
 
         //         // You can now work with $accessToken as needed
         //         dd($accessToken);
+
         //     } else {
         //         // Authentication failed
         //         // Handle the case where the credentials are incorrect
@@ -88,6 +91,13 @@ class StudentAuthController extends Controller
     //     return $this->success([
     //         'message' => 'logged out successfully'
     //     ]);
+    // }
+
+    // private function isNotAuthorize($task){
+
+    //     if (Auth::user()->id !== $task->user_id) {
+    //         return $this->error('', 'You are not authorized to make this request', 403);
+    //     }
     // }
 
 
