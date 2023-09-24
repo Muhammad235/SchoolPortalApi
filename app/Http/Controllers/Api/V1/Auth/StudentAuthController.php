@@ -4,6 +4,7 @@ namespace App\Http\Controllers\APi\V1\Auth;
 
 use App\Models\Student;
 use App\Models\StudentClass;
+use App\Models\SubjectScore;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use App\Http\Controllers\Controller;
@@ -21,28 +22,19 @@ class StudentAuthController extends Controller
     public function register(StoreStudentRequest $request, StudentClass $student)
     {
 
-        // $request->validated($request->all());
-
-        // $student = Student::create([
-        //     'first_name' => $request->first_name,
-        //     'last_name' => $request->last_name,
-        //     'email' => $request->email,
-        //     'address' => $request->address,
-        //     'gender' => $request->gender,
-        //     'class' => $request->class,
-        //     'password' => Hash::make($request->password),
-        // ]);
-
-
         $createStudent = $student->grade()->create($request->validated());
 
-        $studentDetails = new StudentResource($createStudent);
+        $createStudent->score()->create(['student_id' => $createStudent->id]);
 
+        if ($createStudent) {
 
-        return $this->success([
-            'student' => $studentDetails,
-            'token' => $createStudent->createToken($createStudent->first_name)->plainTextToken
-        ]);
+            $studentDetails = new StudentResource($createStudent);
+
+            return $this->success([
+                'student' => $studentDetails,
+                'token' => $createStudent->createToken($createStudent->first_name)->plainTextToken
+            ]);
+        }
 
     }
 

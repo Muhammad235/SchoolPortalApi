@@ -18,6 +18,8 @@
 
 
 
+//subject_score table
+//student_id, math, eng, civic
 
 //teacher
 //first name

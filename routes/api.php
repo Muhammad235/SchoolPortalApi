@@ -10,6 +10,7 @@ use App\Http\Controllers\APi\V1\Auth\AdminAuthController;
 use App\Http\Controllers\APi\V1\Auth\StudentAuthController;
 use App\Http\Controllers\APi\V1\Auth\TeacherAuthController;
 use App\Http\Controllers\Api\V1\Admin\StudentGradeController;
+use App\Http\Controllers\APi\V1\Student\StudentResultController;
 use App\Http\Controllers\APi\V1\Student\StudentProfileController;
 
 
@@ -46,7 +47,13 @@ Route::prefix('portal')->group(function (){
     Route::post('login', [StudentAuthController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function() {
-        Route::apiResource('/student', StudentProfileController::class)->only(['show', 'update', 'destroy']);
+        // Route::apiResource('/student', StudentProfileController::class)->only(['show', 'update', 'destroy']);
+        // Route::apiResource('/student/result', StudentResultController::class)->only(['show', 'update', 'destroy']);
+        Route::get('/student/result', [StudentResultController::class, 'index']);
+        // Route::get('/student/result', function(){
+        //     return 'hello';
+        // });
+        Route::get('/student/result/{student:student_id}', [StudentResultController::class, 'show']);
     });
 });
 

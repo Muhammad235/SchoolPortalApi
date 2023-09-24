@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // \App\Models\Admin::factory()->create();
+        \App\Models\Admin::factory()->create();
 
 
         $number = 0;
 
-        \App\Models\StudentClass::factory(3)->create([
-            'grade' => 'grade ' . $number++,
-        ]);
+        // \App\Models\StudentClass::factory(3)->create([
+        //     'grade' => 'grade ' . $number++,
+        // ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Models\StudentClass;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -19,7 +20,6 @@ class Student extends Authenticatable
         'email',
         'address',
         'gender',
-        // 'class',
         'password'
     ];
 
@@ -32,5 +32,10 @@ class Student extends Authenticatable
     protected $hidden = [
         'password'
     ];
+
+    public function score(): HasOne
+    {
+        return $this->hasOne(SubjectScore::class, 'student_id');
+    }
 
 }
