@@ -9,6 +9,7 @@ class SubjectScore extends Model
 {
     use HasFactory;
 
+
         /**
      * The attributes that are mass assignable.
      *

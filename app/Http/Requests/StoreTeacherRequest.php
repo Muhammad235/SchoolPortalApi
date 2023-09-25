@@ -26,7 +26,6 @@ class StoreTeacherRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:150'],
             'last_name' => ['required', 'string', 'max:150'],
             'email' => ['required', 'string', 'unique:teachers', 'email'],
-            // 'student_class_id' => ['required', 'unique:student_classes', 'string'],
             'password' => ['required', 'confirmed', Password::defaults()]
         ];
     }

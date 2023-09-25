@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\SubjectScore;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,8 +16,13 @@ class ResultResource extends JsonResource
     public function toArray(Request $request): array
     {
 
+        $student = Student::find($this->student_id);
+
+        $studentName = $student->first_name .' '.$student->last_name;
+
         return [
             'student_id' => (string) $this->student_id,
+            'student_name' => $studentName,
             'subject_score' => [
                 'mathematics' => $this->mathematics,
                 'english' => $this->english,

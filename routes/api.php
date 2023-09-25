@@ -34,11 +34,25 @@ Route::prefix('admin')->group(function (){
     Route::post('login', [AdminAuthController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function() {
-        Route::apiResource('/student', StudentController::class)->only(['index', 'show', 'update', 'destroy']);
-        Route::apiResource('/teacher', TeacherController::class)->only(['index', 'show', 'update', 'destroy']);
+        Route::apiResource('/students', StudentController::class)->only(['index', 'show', 'update', 'destroy']);
+        Route::apiResource('/teachers', TeacherController::class)->only(['index', 'show', 'update', 'destroy']);
         Route::post('/teacher/{class_to_teach}', [TeacherAuthController::class, 'store']);
         Route::apiResource('/grade', StudentGradeController::class)->only(['store', 'show', 'update', 'destroy']);
+        Route::apiResource('/student/results', StudentResultController::class);
     });
+});
+
+
+Route::prefix('teacher')->group(function (){
+    Route::post('login', [TeacherAuthController::class, 'login']);
+
+    // Route::middleware('auth:sanctum')->group(function() {
+    //     Route::apiResource('/students', StudentController::class)->only(['index', 'show', 'update', 'destroy']);
+    //     Route::apiResource('/teachers', TeacherController::class)->only(['index', 'show', 'update', 'destroy']);
+    //     Route::post('/teacher/{class_to_teach}', [TeacherAuthController::class, 'store']);
+    //     Route::apiResource('/grade', StudentGradeController::class)->only(['store', 'show', 'update', 'destroy']);
+    //     Route::apiResource('/student/results', StudentResultController::class);
+    // });
 });
 
 
@@ -47,14 +61,8 @@ Route::prefix('portal')->group(function (){
     Route::post('login', [StudentAuthController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function() {
-        // Route::apiResource('/student', StudentProfileController::class)->only(['show', 'update', 'destroy']);
-        // Route::apiResource('/student/result', StudentResultController::class)->only(['show', 'update', 'destroy']);
-        Route::get('/student/result', [StudentResultController::class, 'index']);
-        // Route::get('/student/result', function(){
-        //     return 'hello';
-        // });
+        Route::apiResource('/student', StudentProfileController::class)->only(['show', 'update', 'destroy']);
         Route::get('/student/result/{student:student_id}', [StudentResultController::class, 'show']);
     });
 });
-
 
