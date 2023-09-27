@@ -3,10 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\V1\Admin\StudentController;
 use App\Http\Controllers\Api\V1\Admin\TeacherController;
-
 use App\Http\Controllers\APi\V1\Auth\AdminAuthController;
+
+use App\Http\Controllers\APi\V1\Teacher\StudentController;
 use App\Http\Controllers\APi\V1\Auth\StudentAuthController;
 use App\Http\Controllers\APi\V1\Auth\TeacherAuthController;
 use App\Http\Controllers\Api\V1\Admin\StudentGradeController;
@@ -46,13 +46,13 @@ Route::prefix('admin')->group(function (){
 Route::prefix('teacher')->group(function (){
     Route::post('login', [TeacherAuthController::class, 'login']);
 
-    // Route::middleware('auth:sanctum')->group(function() {
-    //     Route::apiResource('/students', StudentController::class)->only(['index', 'show', 'update', 'destroy']);
+    Route::middleware('auth:sanctum')->group(function() {
+        Route::get('/students/{teacher:student_class_id}/', [StudentController::class, 'index']);
     //     Route::apiResource('/teachers', TeacherController::class)->only(['index', 'show', 'update', 'destroy']);
     //     Route::post('/teacher/{class_to_teach}', [TeacherAuthController::class, 'store']);
     //     Route::apiResource('/grade', StudentGradeController::class)->only(['store', 'show', 'update', 'destroy']);
     //     Route::apiResource('/student/results', StudentResultController::class);
-    // });
+    });
 });
 
 

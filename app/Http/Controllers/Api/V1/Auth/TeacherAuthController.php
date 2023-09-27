@@ -33,7 +33,7 @@ class TeacherAuthController extends Controller
 
           $request->validated($request->all());
 
-           //if the class doesn't have a teacher yet, so create a new the teacher and assign the class
+           //if the class doesn't have a teacher yet, create a new the teacher and assign the class
            $createTeacher = Teacher::create([
                 'student_class_id' => $class_to_teach->id,
                 'first_name' => $request->first_name,

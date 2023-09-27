@@ -36,5 +36,31 @@ class StudentProfileController extends Controller
         ]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Student $student)
+    {
+        //get user id and token id
+        $requestId = $student->id;
+        $bearerToken = $request->bearerToken();
+
+        //compare user id and token id if they match to authorize user
+        if (!$this->isNotAuthorize($requestId, $bearerToken)) {
+            return $this->error('', 'You are not authorized to make this request', 403);
+        }
+
+        $student->update($request->all());
+
+        $student = new StudentResource($student);
+
+        return $this->success([
+            'student' => $student
+        ]);
+
+    }
+
+
+
 
 }

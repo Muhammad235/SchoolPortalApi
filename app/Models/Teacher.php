@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Student;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Teacher extends Model
@@ -21,5 +23,11 @@ class Teacher extends Model
     protected $hidden = [
         'password',
     ];
+
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'student_class_id');
+    }
 
 }

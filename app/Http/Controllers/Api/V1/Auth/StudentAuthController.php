@@ -24,7 +24,32 @@ class StudentAuthController extends Controller
     public function register(StoreStudentRequest $request, StudentClass $student)
     {
 
-        $createStudent = $student->grade()->create($request->validated());
+
+        // $request->validated($request->all());
+
+
+        // $createStudent = $student->grade()->create(['student_class_id', $student->id]);
+
+            // Validate the request
+            $validatedData = $request->validated();
+
+             // Hash the password
+            $validatedData['password'] = Hash::make($request->password);
+
+            // Create the student and the relationship
+            $createStudent = $student->grade()->create($validatedData);
+
+
+        // $createStudent = Student::create([
+        //     'first_name' => $request->first_name,
+        //     'last_name' => $request->last_name,
+        //     'address' => $request->address,
+        //     'gender' => $request->gender,
+        //     // 'student_class_id' => $student->id,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->input('password')),
+        // ]);
+
 
         $createStudent->score()->create(['student_id' => $createStudent->id]);
 
@@ -45,18 +70,19 @@ class StudentAuthController extends Controller
     {
         $request->validated($request->all());
 
-        $user = Student::where('email', $request->email)->first();
+        $getUser = Student::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$getUser || !Hash::check($request->password, $getUser->password)) {
             return response()->json([
                 'error' => 'The provided credentials are incorrect',
             ], 401);
         }
 
-        $device = substr($request->userAgent() ?? '', 0, 255);
+        $user = new StudentResource($getUser);
 
-        return response()->json([
-            'access_token' => $user->createToken($device)->plainTextToken,
+        return $this->success([
+            'teacher' => $teacher,
+            'token' => $getUser->createToken($user->first_name)->plainTextToken
         ]);
 
     }
