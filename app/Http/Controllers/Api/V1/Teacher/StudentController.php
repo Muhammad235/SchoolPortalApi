@@ -15,6 +15,7 @@ class StudentController extends Controller
     use CheckAuthorize;
 
     public function index(Request $request, Teacher $teacher)
+
     {
 
     //get teacher id and token id
@@ -25,23 +26,59 @@ class StudentController extends Controller
     // $students = $teacher->students();
 
 
-    if (!$this->canModifyStudent($requestId, $bearerToken)){
+        if (!$this->canModifyStudent($requestId, $bearerToken)){
 
-        return $this->error([], 'You are not authorized to make this request', 403);
+            return $this->error([], 'You are not authorized to make this request', 403);
 
-    }else {
+        }else {
 
-        $students = Student::where('student_class_id', $teacher->student_class_id)->get();
+            $students = Student::where('student_class_id', $teacher->student_class_id)->get();
 
-        $studentsResource = StudentResource::collection($students);
+            $studentsResource = StudentResource::collection($students);
 
-        $teacherResource = new TeacherResource($teacher);
+            $teacherResource = new TeacherResource($teacher);
 
-        return $this->success([
-            'teacher' => $teacherResource,
-            'students' => $studentsResource
-        ]);
+            return $this->success([
+                'teacher' => $teacherResource,
+                'students' => $studentsResource
+            ]);
+        }
+
     }
+
+    public function show(Request $request, Teacher $teacher, Student $student)
+    {
+
+
+        $studentClass = $student->student_class_id;
+        $teacherClass = $teacher->student_class_id;
+
+        //get teacher id and token id
+        $requestId = $teacher->student_class_id;
+        $bearerToken = $request->bearerToken();
+
+        if (!$this->canModifyStudent($requestId, $bearerToken)){
+
+            return $this->error([], 'You are not authorized to make this request', 403);
+
+        }else {
+
+           if ($studentClass !== $teacherClass) {
+
+            return $this->error([], 'You are not authorized to access this resoource', 403);
+
+           }
+
+            // Retrieve and return the specific student's information.
+            $studentsResource = new StudentResource($student);
+
+            // $teacherResource = new TeacherResource($teacher);
+
+            return $this->success([
+                // 'teacher' => $teacherResource,
+                'student' => $studentsResource
+            ]);
+        }
 
     }
 }

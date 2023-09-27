@@ -48,6 +48,10 @@ Route::prefix('teacher')->group(function (){
 
     Route::middleware('auth:sanctum')->group(function() {
         Route::get('/students/{teacher:student_class_id}/', [StudentController::class, 'index']);
+        // Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
+        Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
+
+
     //     Route::apiResource('/teachers', TeacherController::class)->only(['index', 'show', 'update', 'destroy']);
     //     Route::post('/teacher/{class_to_teach}', [TeacherAuthController::class, 'store']);
     //     Route::apiResource('/grade', StudentGradeController::class)->only(['store', 'show', 'update', 'destroy']);
