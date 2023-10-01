@@ -7,6 +7,7 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Traits\CheckAuthorize;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ResultResource;
 use App\Http\Resources\StudentResource;
 use App\Http\Resources\TeacherResource;
 
@@ -15,7 +16,6 @@ class StudentController extends Controller
     use CheckAuthorize;
 
     public function index(Request $request, Teacher $teacher)
-
     {
 
     //get teacher id and token id
@@ -46,6 +46,7 @@ class StudentController extends Controller
 
     }
 
+
     public function show(Request $request, Teacher $teacher, Student $student)
     {
 
@@ -69,18 +70,24 @@ class StudentController extends Controller
 
            }
 
-            // Retrieve and return the specific student's information.
-            $studentsResource = new StudentResource($student);
+            $getStudentResult = $student->score()->first();
 
-            // $teacherResource = new TeacherResource($teacher);
+            $studentResult = new ResultResource($getStudentResult);
 
             return $this->success([
                 // 'teacher' => $teacherResource,
-                'student' => $studentsResource
+                'student' => $studentResult
             ]);
         }
 
     }
+
+    public function update(Request $request, SubjectScore )
+    {
+
+    }
+
+
 }
 
 
