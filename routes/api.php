@@ -72,6 +72,7 @@ Route::prefix('portal')->group(function (){
     });
 });
 
+
 Route::get('/test', function(){
-    return "test";
+    dd(Student::all);
 });
