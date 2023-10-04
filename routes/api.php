@@ -12,6 +12,7 @@ use App\Http\Controllers\APi\V1\Auth\TeacherAuthController;
 use App\Http\Controllers\Api\V1\Admin\StudentGradeController;
 use App\Http\Controllers\APi\V1\Student\StudentResultController;
 use App\Http\Controllers\APi\V1\Student\StudentProfileController;
+use App\Http\Controllers\Api\V1\Teacher\UploadStudentResultController;
 
 
 
@@ -50,6 +51,7 @@ Route::prefix('teacher')->group(function (){
         Route::get('/students/{teacher:student_class_id}/', [StudentController::class, 'index']);
         // Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
         Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
+        Route::apiResource('/student/results', UploadStudentResultController::class);
 
 
     //     Route::apiResource('/teachers', TeacherController::class)->only(['index', 'show', 'update', 'destroy']);

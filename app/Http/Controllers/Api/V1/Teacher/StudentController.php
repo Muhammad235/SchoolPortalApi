@@ -82,8 +82,14 @@ class StudentController extends Controller
 
     }
 
-    public function update(Request $request, SubjectScore )
+    public function update(Request $request, SubjectScore $student)
     {
+
+        dd($request);
+
+    //     $result->update($request->only([
+    //         'mathematics', 'english', 'biology', 'civic', 'physics', 'chemistry'
+    //    ]));
 
     }
 
