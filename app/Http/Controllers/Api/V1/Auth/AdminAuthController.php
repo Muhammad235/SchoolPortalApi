@@ -30,6 +30,22 @@ class AdminAuthController extends Controller
 
     }
 
+    public function register(Request $request)
+    {
+
+        // dd($request);
+
+       $admin = Admin::create([
+        'username' => $request->username,
+        'password' => Hash::make($request->password),
+       ]);
+
+       return response()->json([
+        'admin' => $admin,
+        'token' => $admin->createToken($admin->username)->plainTextToken
+        ]);
+    }
+
     // public function logout()
     // {
     //     Auth::guard('student')->user()->currentAccessToken()->delete();

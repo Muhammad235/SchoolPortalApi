@@ -73,6 +73,8 @@ Route::prefix('portal')->group(function (){
     });
 });
 
+Route::post('/create_admin', [AdminAuthController::class, 'register']);
+
 
 Route::get('/test', function(){
     dd(Admin::all());
