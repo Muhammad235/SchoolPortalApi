@@ -74,5 +74,5 @@ Route::prefix('portal')->group(function (){
 
 
 Route::get('/test', function(){
-    dd(Student::all);
+    dd(Admin::all());
 });
