@@ -23,12 +23,13 @@ class StudentController extends Controller
     $bearerToken = $request->bearerToken();
 
     // Use the 'students' relationship to get all students associated with the teacher
-    // $students = $teacher->students();
-
+    $students = $teacher->students();
 
         if (!$this->canModifyStudent($requestId, $bearerToken)){
 
-            return $this->error([], 'You are not authorized to make this request', 403);
+            return response()->json([
+                'error' => 'You are not authorized to make this request',
+            ], 403);
 
         }else {
 
@@ -38,10 +39,11 @@ class StudentController extends Controller
 
             $teacherResource = new TeacherResource($teacher);
 
-            return $this->success([
+            return response()->json([
+                'message' => 'Request was successfull',
                 'teacher' => $teacherResource,
-                'students' => $studentsResource
-            ]);
+                'students' => $studentsResource,
+            ], 200);
         }
 
     }
@@ -49,7 +51,6 @@ class StudentController extends Controller
 
     public function show(Request $request, Teacher $teacher, Student $student)
     {
-
 
         $studentClass = $student->student_class_id;
         $teacherClass = $teacher->student_class_id;
@@ -60,24 +61,26 @@ class StudentController extends Controller
 
         if (!$this->canModifyStudent($requestId, $bearerToken)){
 
-            return $this->error([], 'You are not authorized to make this request', 403);
+            return response()->json([
+                'error' => 'You are not authorized to make this request',
+            ], 403);
 
         }else {
 
            if ($studentClass !== $teacherClass) {
-
-            return $this->error([], 'You are not authorized to access this resoource', 403);
-
+                return response()->json([
+                    'error' => 'You are not authorized to make this request',
+                ], 403);
            }
 
             $getStudentResult = $student->score()->first();
 
             $studentResult = new ResultResource($getStudentResult);
 
-            return $this->success([
-                // 'teacher' => $teacherResource,
-                'student' => $studentResult
-            ]);
+            return response()->json([
+                'message' => 'Request was successfull',
+                'data' => $studentResult
+            ], 200);
         }
 
     }

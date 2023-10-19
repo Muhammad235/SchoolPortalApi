@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Traits;
+use App\Models\Student;
 use App\Models\Teacher;
-use App\Traits\HttpResponses;
 use Laravel\Sanctum\PersonalAccessToken;
 
 trait CheckAuthorize{
 
-    use HttpResponses;
 
     public function isNotAuthorize($requestId, $bearerToken): bool{
 
@@ -42,6 +41,7 @@ trait CheckAuthorize{
 
            return true;
         }
-
     }
+
+
 }

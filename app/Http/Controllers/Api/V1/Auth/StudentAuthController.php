@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\APi\V1\Auth;
+namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Models\Student;
 use App\Models\StudentClass;
 use App\Models\SubjectScore;
 use Illuminate\Http\Request;
-use App\Traits\HttpResponses;
-use App\Traits\CheckAuthorize;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,37 +17,15 @@ use App\Http\Requests\StoreStudentRequest;
 
 class StudentAuthController extends Controller
 {
-    use HttpResponses, CheckAuthorize;
 
     public function register(StoreStudentRequest $request, StudentClass $student)
     {
 
+        //Validate the request
+         $validatedData = $request->validated();
 
-        // $request->validated($request->all());
-
-
-        // $createStudent = $student->grade()->create(['student_class_id', $student->id]);
-
-            // Validate the request
-            $validatedData = $request->validated();
-
-             // Hash the password
-            $validatedData['password'] = Hash::make($request->password);
-
-            // Create the student and the relationship
-            $createStudent = $student->grade()->create($validatedData);
-
-
-        // $createStudent = Student::create([
-        //     'first_name' => $request->first_name,
-        //     'last_name' => $request->last_name,
-        //     'address' => $request->address,
-        //     'gender' => $request->gender,
-        //     // 'student_class_id' => $student->id,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->input('password')),
-        // ]);
-
+        // Create the student and the relationship
+        $createStudent = $student->grade()->create($validatedData);
 
         $createStudent->score()->create(['student_id' => $createStudent->id]);
 
@@ -57,11 +33,11 @@ class StudentAuthController extends Controller
 
             $studentDetails = new StudentResource($createStudent);
 
-            return $this->success([
-                'student' => $studentDetails,
-               $createStudent->createToken($createStudent->first_name)->plainTextToken
-            ]);
-
+            return response()->json([
+                "message" => "Request was successfull",
+                'data' => $studentDetails,
+                'token' =>  $createStudent->createToken($createStudent->first_name)->plainTextToken
+              ], 201);
         }
 
     }
@@ -80,28 +56,18 @@ class StudentAuthController extends Controller
 
         $user = new StudentResource($getUser);
 
-        return $this->success([
-            'teacher' => $teacher,
-            'token' => $getUser->createToken($user->first_name)->plainTextToken
-        ]);
+        return response()->json([
+            "message" => "Request was successfull",
+            'data' => $user,
+            'token' =>  $getUser->createToken($user->first_name)->plainTextToken
+          ], 200);
 
     }
 
-    // public function logout()
-    // {
-    //     Auth::guard('student')->user()->currentAccessToken()->delete();
-
-    //     return $this->success([
-    //         'message' => 'logged out successfully'
-    //     ]);
-    // }
-
-    // private function isNotAuthorize($task){
-
-    //     if (Auth::user()->id !== $task->user_id) {
-    //         return $this->error('', 'You are not authorized to make this request', 403);
-    //     }
-    // }
-
+    public function logout()
+    {
+        Auth::user()->currentAccessToken()->delete();
+        return response()->json([], 204);
+    }
 
 }

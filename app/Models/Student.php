@@ -38,6 +38,15 @@ class Student extends Authenticatable
         'password'
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+
     public function score(): HasOne
     {
         return $this->hasOne(SubjectScore::class, 'student_id');

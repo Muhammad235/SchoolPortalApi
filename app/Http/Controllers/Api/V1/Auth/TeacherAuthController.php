@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\APi\V1\Auth;
+namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Models\Teacher;
 use App\Models\StudentClass;
@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\TeacherResource;
 use App\Http\Requests\StoreTeacherRequest;
@@ -25,9 +26,9 @@ class TeacherAuthController extends Controller
         // Check if the class already has a teacher
         if ($class_to_teach->teacher_class) {
 
-            return $this->error([], [
+             return response()->json([
                 'errors' => 'A teacher is taking this class',
-             ], 500);
+            ], 403);
 
         } else {
 
@@ -46,10 +47,11 @@ class TeacherAuthController extends Controller
 
         }
 
-        return $this->success([
-            'teacher' => $TeacherDetails,
+        return response()->json([
+            'message' => 'Request was successfull',
+            'data' => $TeacherDetails,
             'token' => $createTeacher->createToken($createTeacher->first_name)->plainTextToken
-        ]);
+        ], 201);
 
     }
 
@@ -63,15 +65,29 @@ class TeacherAuthController extends Controller
             return response()->json([
                 'error' => 'The provided credentials are incorrect',
             ], 401);
-
         }
 
         $teacher =  new TeacherResource($getTeacher);
 
-        return $this->success([
-            'teacher' => $teacher,
+        return response()->json([
+            'message' => 'Request was successfull',
+            'data' => $teacher,
+            'token' => $getTeacher->createToken($getTeacher->first_name)->plainTextToken
+        ], 200);
+
+        return response()->json([
+            'message' => 'Request was successfull',
+            'data' => $teacher,
             'token' => $getTeacher->createToken($getTeacher->first_name)->plainTextToken
         ]);
+    }
+
+
+    public function logout()
+    {
+        Auth::user()->currentAccessToken()->delete();
+        return response()->json([], 204);
+
     }
 
 }

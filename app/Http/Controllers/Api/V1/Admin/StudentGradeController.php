@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
-use App\Traits\HttpResponses;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class StudentGradeController extends Controller
 {
-    use HttpResponses;
 
     public function store(Request $request)
     {
@@ -29,13 +27,18 @@ class StudentGradeController extends Controller
        $createGrade =  StudentClass::create(['grade' => $request->grade]);
 
        if ($createGrade) {
-           return $this->success([
-            'data' => $request->grade
-           ]);
+
+           return response()->json([
+            "message" => "Request was successfull",
+            'data' => $createGrade->grade,
+          ], 201);
+
        }else {
-        return $this->error([], [
+
+         return response()->json([
             'error' => 'There is an erorr creating the grade',
-         ], 500);
+          ], 500);
+
        }
     }
 }
