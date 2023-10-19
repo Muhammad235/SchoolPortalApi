@@ -52,6 +52,4 @@ class Student extends Authenticatable
         return $this->hasOne(SubjectScore::class, 'student_id');
     }
 
-
-
 }

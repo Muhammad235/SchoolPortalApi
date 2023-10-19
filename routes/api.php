@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\Admin;
 
+
 use App\Http\Controllers\Api\V1\Auth\AdminAuthController;
 use App\Http\Controllers\APi\V1\Teacher\StudentController;
+
 use App\Http\Controllers\Api\V1\Auth\StudentAuthController;
-
 use App\Http\Controllers\Api\V1\Auth\TeacherAuthController;
-use App\Http\Controllers\Api\V1\Student\StudentResultController;
 
+
+use App\Http\Controllers\Api\V1\Student\StudentResultController;
 use App\Http\Controllers\Api\V1\Student\StudentProfileController;
 use App\Http\Controllers\Api\V1\Teacher\UploadStudentResultController;
 
@@ -36,7 +38,7 @@ Route::prefix('admin')->group(function (){
     Route::middleware('auth:sanctum')->group(function() {
         Route::apiResource('/students', Admin\StudentController::class)->only(['index', 'show', 'update', 'destroy']);
         Route::apiResource('/teachers', Admin\TeacherController::class)->only(['index', 'show', 'update', 'destroy']);
-        Route::post('/teacher/{class_to_teach}', [Admin\TeacherAuthController::class, 'store']);
+        Route::post('/teacher/{class_to_teach}', [TeacherAuthController::class, 'store']);
         Route::apiResource('/grade', Admin\StudentGradeController::class)->only(['store', 'show', 'update', 'destroy']);
         Route::apiResource('/student/results', StudentResultController::class);
     });
@@ -51,7 +53,10 @@ Route::prefix('teacher')->group(function (){
         Route::get('/students/{teacher:student_class_id}/', [StudentController::class, 'index']);
         Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
         Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
-        Route::apiResource('/student/results', UploadStudentResultController::class);
+        Route::apiResource('/results/student', UploadStudentResultController::class);
+
+        // Route::put('/results/student', [UploadStudentResultController::class, 'update']);
+
     });
 });
 

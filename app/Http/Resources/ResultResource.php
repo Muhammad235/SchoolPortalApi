@@ -34,7 +34,7 @@ class ResultResource extends JsonResource
                 'civic' => $this->civic,
                 'physics' => $this->physics,
                 'chemistry' => $this->chemistry,
-                // 'health education' => $this->health /education,
+                'health_education' => $this->health_education,
                 'chemistry' => $this->chemistry,
             ]
         ];

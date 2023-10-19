@@ -15,7 +15,7 @@ use App\Http\Requests\StoreTeacherRequest;
 
 class TeacherAuthController extends Controller
 {
-    use HttpResponses;
+
 
     /**
      * Store a newly created resource in storage.

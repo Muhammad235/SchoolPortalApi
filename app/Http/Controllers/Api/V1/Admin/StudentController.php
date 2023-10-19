@@ -9,7 +9,6 @@ use App\Http\Resources\StudentResource;
 
 class StudentController extends Controller
 {
-    use HttpResponses;
 
     /**
      * Display a listing of the resource.
