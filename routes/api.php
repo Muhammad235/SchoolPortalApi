@@ -36,30 +36,24 @@ Route::prefix('admin')->group(function (){
     Route::post('login', [AdminAuthController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function() {
-        Route::apiResource('/students', Admin\StudentController::class)->only(['index', 'show', 'update', 'destroy']);
+        Route::apiResource('/students', Admin\StudentController::class)->only(['index', 'show', 'destroy']);
         Route::apiResource('/teachers', Admin\TeacherController::class)->only(['index', 'show', 'update', 'destroy']);
         Route::post('/teacher/{class_to_teach}', [TeacherAuthController::class, 'store']);
-        Route::apiResource('/grade', Admin\StudentGradeController::class)->only(['store', 'show', 'update', 'destroy']);
+        Route::apiResource('/grade', Admin\StudentGradeController::class)->only(['store', 'destroy']);
         Route::apiResource('/student/results', StudentResultController::class);
     });
 });
 
-
 Route::prefix('teacher')->group(function (){
     Route::post('login', [TeacherAuthController::class, 'login']);
-
     Route::middleware('auth:sanctum')->group(function() {
         Route::post('logout', [TeacherAuthController::class, 'logout']);
         Route::get('/students/{teacher:student_class_id}/', [StudentController::class, 'index']);
         Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
         Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
-        Route::apiResource('/results/student', UploadStudentResultController::class);
-
-        // Route::put('/results/student', [UploadStudentResultController::class, 'update']);
-
+        Route::put('/results/student/{student}', [UploadStudentResultController::class, 'update']);
     });
 });
-
 
 Route::prefix('portal')->group(function (){
     Route::post('{student}/register', [StudentAuthController::class, 'register']);
@@ -69,6 +63,5 @@ Route::prefix('portal')->group(function (){
         Route::apiResource('/student', StudentProfileController::class)->only(['show', 'update', 'destroy']);
         Route::get('/student/result/{student:student_id}', [StudentResultController::class, 'show']);
         Route::post('logout', [StudentAuthController::class, 'logout']);
-
     });
 });

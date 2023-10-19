@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Validator;
 class StudentGradeController extends Controller
 {
 
+    /**
+     * store the specified resource.
+     */
     public function store(Request $request)
     {
         $rules = [
@@ -39,6 +42,23 @@ class StudentGradeController extends Controller
             'error' => 'There is an erorr creating the grade',
           ], 500);
 
+       }
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+       $deleteGrade = StudentClass::where('id', $id)->delete();
+
+       if ($deleteGrade) {
+          return response()->json([], 204);
+       }else {
+        return response()->json([
+            'error' => 'Unable to process request, server error'
+        ], 500);
        }
     }
 }

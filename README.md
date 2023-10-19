@@ -7,15 +7,61 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# SchoolPortal API DOC  
+***
+###  This comprehensive guide will walk you through the various endpoints, functionalities, and how to integrate and utilize this API, feel free to use or contribute to this project. 🚀
 
+
+## Admin Endpoint  
+
+#### The admin can only login with the details below, admin can perform several operations such as:
+
+- create teacher and assign them to a class
+- creatd and delete grade
+- get all student information including result
+- get all teachers information
+
+> URL - http://127.0.0.1:8080/api/admin/login
+
+>Method: POST
+
+### login has admin
+```
+{
+    "username": "Admin",
+    "email": "admin1010",
+}
+
+```
+
+###  create teacher and assign them to class
+
+> URL - http://127.0.0.1:8000/api/admin/teacher/{class_id}
+
+```
+{
+    "first_name": "Admin", | string
+    "last_name": "admin1010", | string
+    "email": "admin1010", | string
+    "password": "admin1010", | string, not less than 8 characters
+    "password_confirmation": "admin1010",
+}
+
+```
+
+###  get all teachers 
+
+> URL - http://127.0.0.1:8080/api/admin/teachers
+
+```
+{
+    "first_name": "Admin", | string
+    "last_name": "admin1010", | string
+    "email": "admin1010", | string
+    "password": "admin1010", | string, not less than 8 characters
+    "password_confirmation": "admin1010",
+}
+
+```

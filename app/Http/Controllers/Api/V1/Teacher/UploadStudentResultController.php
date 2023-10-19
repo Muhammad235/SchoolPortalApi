@@ -6,12 +6,12 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ResultResource;
+use App\Http\Requests\StudentScoreRequest;
 
 class UploadStudentResultController extends Controller
 {
-    public function update(Request $request, Student $student)
+    public function update(StudentScoreRequest $request, Student $student)
     {
-
 
         $updateScore = $student->score()->update([
             "mathematics" => $request->mathematics,
