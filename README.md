@@ -170,7 +170,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 3,
                 "profile_image": null,
@@ -182,7 +182,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student2@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 3,
                 "profile_image": null,
@@ -194,7 +194,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student3@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -206,7 +206,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student4@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -218,7 +218,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student5@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -230,7 +230,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student6@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -242,7 +242,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student7@gmail.co",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -254,7 +254,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student8@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -266,7 +266,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student9@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -278,7 +278,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student10@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -290,7 +290,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student11@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -302,7 +302,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student12@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -314,7 +314,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student13@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -326,7 +326,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student14@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -338,7 +338,7 @@
                 "first_name": "bbb",
                 "last_name": "aaaaa",
                 "email": "student15@gmail.com",
-                "address": "ibadan, Nigeria",
+                "address": "lane 9, musoro new piece",
                 "gender": "male",
                 "student_class_id": 5,
                 "profile_image": null,
@@ -404,10 +404,335 @@
             "first_name": "bbb",
             "last_name": "aaaaa",
             "email": "student@gmail.com",
-            "address": "ibadan, Nigeria",
+            "address": "lane 9, musoro new piece",
             "class": "grade 1",
             "gender": "male"
         }
     }
+}
+```
+
+
+## Teacher Endpoint  
+
+#### The teacher can only login with the details the admin has used in creating the teacher:
+
+- teachers  has all access to only their class student
+- upload their student result
+
+
+> URL -`[public]` http://127.0.0.1:8080/api/teacher/login
+
+>Method: POST
+
+### login has admin
+```
+{
+    "email": "teacherxyz@gmail.com", | email. string
+    "pasword": "teach12345", | string
+}
+```
+
+
+### The below endpoints are auth and they are to be accessed by an authenticated user providing the teacher bearer token.
+***
+
+### get the teacher students by the class they teach
+
+> URL -`[auth]` http://127.0.0.1:8080/api/teacher/students/{student_class_id}
+
+>Method: GET
+
+{student_class_id} - here is the id of the grade/class
+
+```
+{
+    "message": "Request was successfull",
+    "teacher": {
+        "id": "3",
+        "details": {
+            "first_name": "Teacher 3",
+            "last_name": "yyy",
+            "email": "teach3@gmail.com",
+            "class_to_teach": "grade 3"
+        }
+    },
+    "students": [
+        {
+            "id": "3",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student3@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "4",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student4@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "5",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student5@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "6",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student6@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "7",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student7@gmail.co",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "8",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student8@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "9",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student9@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "10",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student10@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "11",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student11@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "12",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student12@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "13",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student13@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "14",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student14@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "15",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student15@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "16",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student16@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "17",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "student17@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "18",
+            "details": {
+                "first_name": "updated name",
+                "last_name": "latest",
+                "email": "student18@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "23",
+            "details": {
+                "first_name": "updated name",
+                "last_name": "latest",
+                "email": "studentrrr@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "24",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "studentrdddd@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "25",
+            "details": {
+                "first_name": "bbb",
+                "last_name": "aaaaa",
+                "email": "studaaaadd@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "26",
+            "details": {
+                "first_name": "updated name",
+                "last_name": "latest",
+                "email": "studaaeeeeaadd@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "27",
+            "details": {
+                "first_name": "sdien",
+                "last_name": "sheudhdhd",
+                "email": "ajshdudhd@gmail.com",
+                "address": "lane 9, musoro new piece",
+                "class": "grade 3",
+                "gender": "male"
+            }
+        },
+        {
+            "id": "28",
+            "details": {
+                "first_name": "sdien",
+                "last_name": "sheudhdhd",
+                "email": "ajsdhd@gmail.com",
+                "address": "sgd lane 8 , california",
+                "class": "grade 3",
+                "gender": "female"
+            }
+        },
+        {
+            "id": "29",
+            "details": {
+                "first_name": "sdien",
+                "last_name": "sheudhdhd",
+                "email": "adeyyyy@gmail.com",
+                "address": "sgd lane 8 , california",
+                "class": "grade 3",
+                "gender": "female"
+            }
+        },
+        {
+            "id": "30",
+            "details": {
+                "first_name": "adeyyyy",
+                "last_name": "heydyy",
+                "email": "swesssy@gmail.com",
+                "address": "sgd lane 8 , california",
+                "class": "grade 3",
+                "gender": "female"
+            }
+        },
+        {
+            "id": "31",
+            "details": {
+                "first_name": "adeyyyy",
+                "last_name": "wwethht",
+                "email": "werhhd@gmail.com",
+                "address": "sgd lane 8 , california",
+                "class": "grade 3",
+                "gender": "female"
+            }
+        }
+    ]
 }
 ```
