@@ -15,7 +15,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $allStudent = StudentResource::collection(Student::all());
+
+        // $allStudent = StudentResource::collection(Student::all());
+
+        $allStudent = Student::paginate();
 
         return response()->json([
             "message" => "  Request was successfull",
