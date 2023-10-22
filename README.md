@@ -31,7 +31,7 @@
 
 >Method: POST
 
-### login has admin
+### login as admin
 ```
 {
     "username": "Admin",
@@ -415,9 +415,9 @@
 
 ## Teacher Endpoint  
 
-#### The teacher can only login with the details the admin has used in creating the teacher:
+#### The teacher can only login with the details the admin as used in creating the teacher:
 
-- teachers  has all access to only their class student
+- teachers  as all access to only their class student
 - upload their student result
 
 
@@ -425,11 +425,11 @@
 
 >Method: POST
 
-### login has admin
+### login as admin
 ```
 {
-    "email": "teacherxyz@gmail.com", | email. string
-    "pasword": "teach12345", | string
+    "email": "teacherxyz@gmail.com", | email, string
+    "password": "teach12345", | string
 }
 ```
 
@@ -735,4 +735,103 @@
         }
     ]
 }
+```
+
+### upload student result/score 
+
+> URL -`[auth]` http://127.0.0.1:8080/api/teacher/results/student/{student_id}
+
+- {student_id} this as to be the id of the student that belongs to the teacher class
+
+>Method: PUT
+
+```
+{
+    "mathematics": 70, | numeric
+    "english": 70, | numeric
+    "arabic": 70, | numeric
+    "health_education": 70, | numeric
+    "biology": 70, | numeric
+    "civic": 70, | numeric
+    "chemistry": 70, | numeric
+    "physics": 70 | numeric
+} 
+```
+
+
+## Student Endpoint  
+
+### signup as student
+
+> URL -`[public]` http://127.0.0.1:8080/api/portal/{grade_id}/register
+
+{grade_id} - grade id 
+
+>Method: POST
+
+```
+{
+    "first_name": "zendo", | string
+    "last_name": "arch", | string
+    "email": "student@gmail.com", | string, valid email
+    "address": "lane 9, tambobo california", | string
+    "gender": "male", | string(male, female)
+    "class": "grade 1", | string
+    "password": "12345678", | string, not less than 8 characters
+    "password_confirmation": "12345678" 
+} 
+```
+### login as student
+
+> URL -`[public]` http://127.0.0.1:8080/api/portal/login
+
+>Method: POST
+
+```
+{
+    "email": "studentemail@gmail.com", | email, string
+    "password": "12345678", | string
+}
+```
+
+
+### The below endpoints are auth and they are to be accessed by an authenticated user providing the student bearer token.
+***
+
+### student profile
+
+> URL -`[auth]` http://127.0.0.1:8080/api/portal/student/{student_id}
+
+>Method: GET
+
+```
+{
+    "message": "Request was successfull",
+    "data": {
+        "id": "26",
+        "details": {
+            "first_name": "updated name",
+            "last_name": "latest",
+            "email": "studaaeeeeaadd@gmail.com",
+            "address": "ibadan, Nigeria",
+            "class": "grade 3",
+            "gender": "male"
+        }
+    }
+}
+```
+
+
+
+***
+### general endpoint [Logout]
+
+> URL -`[auth]` http://127.0.0.1:8080/api/{user_type}/logout
+
+- {user_type} can either be `admin`, `teacher` or `student`
+
+>Method: POST
+
+```
+    it will return 204 No Content  
 ```
