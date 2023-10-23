@@ -830,14 +830,15 @@
 ```
 {
 
-    "first_name": "updated name", | string
-    "last_name": "latest", | string
+    "first_name": "brendon", | string
+    "last_name": "weeetee", | string
     "email": "studaaeeeeaadd@gmail.com", | string, valid email
     "address": "lane 9, tambobo california", | string
     "class": "grade 3", | string
     "gender": "male" | string(male, female)
 }
 ```
+
 
 ### student result
 
@@ -850,16 +851,16 @@
     "message": "Request was successfull",
     "data": {
         "student_id": "26",
-        "student_name": "updated name latest",
+        "student_name": "brendon weeetee",
         "grade": "grade 3",
         "subject_score": {
-            "mathematics": null,
-            "english": null,
-            "biology": null,
-            "civic": null,
-            "physics": null,
-            "chemistry": null,
-            "health_education": null
+            "mathematics": 70,
+            "english": 70,
+            "biology": 70,
+            "civic": 70,
+            "physics": 70,
+            "chemistry": 70,
+            "health_education": 70
         }
     }
 }
