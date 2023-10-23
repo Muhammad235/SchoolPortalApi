@@ -37,7 +37,7 @@ class StudentResultController extends Controller
         $requestId = $student->student_id;
         $bearerToken = $request->bearerToken();
 
-        dd($requestId, auth()->id());
+        // dd($requestId, auth()->id());
 
         //compare user id and token id if they match to authorize user
         if (!$this->isNotAuthorize($requestId, $bearerToken)) {

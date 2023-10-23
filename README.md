@@ -821,6 +821,49 @@
 }
 ```
 
+### update profile
+
+> URL -`[auth]` http://127.0.0.1:8080/api/portal/student/{student_id}
+
+>Method: PUT
+
+```
+{
+
+    "first_name": "updated name", | string
+    "last_name": "latest", | string
+    "email": "studaaeeeeaadd@gmail.com", | string, valid email
+    "address": "lane 9, tambobo california", | string
+    "class": "grade 3", | string
+    "gender": "male" | string(male, female)
+}
+```
+
+### student result
+
+> URL -`[auth]` http://127.0.0.1:8080/api/portal/student/result/{student_id}
+
+>Method: GET
+
+```
+{
+    "message": "Request was successfull",
+    "data": {
+        "student_id": "26",
+        "student_name": "updated name latest",
+        "grade": "grade 3",
+        "subject_score": {
+            "mathematics": null,
+            "english": null,
+            "biology": null,
+            "civic": null,
+            "physics": null,
+            "chemistry": null,
+            "health_education": null
+        }
+    }
+}
+```
 
 
 ***
