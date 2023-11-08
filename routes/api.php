@@ -46,6 +46,7 @@ Route::prefix('admin')->group(function (){
 
 Route::prefix('teacher')->group(function (){
     Route::post('login', [TeacherAuthController::class, 'login']);
+    
     Route::middleware('auth:sanctum')->group(function() {
         Route::post('logout', [TeacherAuthController::class, 'logout']);
         Route::get('/students/{teacher:student_class_id}/', [StudentController::class, 'index']);

@@ -16,7 +16,11 @@ class StudentClassFactory extends Factory
      */
     public function definition(): array
     {
+        static $grade = 1; // Initialize the grade
+
         return [
+            'grade' => 'grade ' . $grade++, // Increment the grade for each instance
+
         ];
     }
 }

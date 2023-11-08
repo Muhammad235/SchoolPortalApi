@@ -12,20 +12,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Check if an admin record already exists
+        $existingAdmin = \App\Models\Admin::first();
 
-        \App\Models\Admin::factory()->create();
+        // If no admin record exists, create one
+        if (!$existingAdmin) {
+            \App\Models\Admin::factory()->create();
+        }
 
+        \App\Models\StudentClass::factory()->count(10)->create();
 
-        $number = 0;
+        \App\Models\Student::factory(30)->create();
 
-        // \App\Models\StudentClass::factory(3)->create([
-        //     'grade' => 'grade ' . $number++,
-        // ]);
+        \App\Models\Teacher::factory(7)->create();
+
     }
 }

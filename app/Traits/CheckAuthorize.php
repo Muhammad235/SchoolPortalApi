@@ -1,60 +1,44 @@
 <?php
 
 namespace App\Traits;
-use App\Models\Student;
+use App\Models\Admin;
 use App\Models\Teacher;
 use Laravel\Sanctum\PersonalAccessToken;
 
 trait CheckAuthorize{
 
-
-    // public function isNotAuthorize($requestId, $bearerToken): bool{
-
-    //     $getUser = PersonalAccessToken::findToken($bearerToken);
-
-    //     $userId = $getUser->tokenable->id;
-
-    //     // return "$userId == $requestId";
-    //     if ($requestId !== $userId){
-    //         return false;
-    //     }
-    //     return true;
-    // }
-
     public function isNotAuthorize($requestId, $bearerToken): bool{
 
-        $getUser = PersonalAccessToken::findToken($bearerToken);
+        $userId = auth()->id();
 
-        $userId = $getUser->tokenable->id;
-
-        // return "$userId == $requestId";
         if ($requestId !== $userId){
             return false;
         }
+        
         return true;
     }
 
-    public function canModifyStudent($requestId, $bearerToken){
 
+    public function canModifyStudent($requestId, $bearerToken) {
         $getUser = PersonalAccessToken::findToken($bearerToken);
-        $userId = $getUser->tokenable->id;
-
-        $findTeacherById = Teacher::find($userId);
-
-
-        if ($findTeacherById) {
-
-           $getTeacherClass = $findTeacherById->student_class_id;
-
-           if ($getTeacherClass !== $requestId) {
-
-             return false;
-
-           }
-
-           return true;
+    
+        if (!$getUser || !$getUser->tokenable) {
+            return false; // Handle the case where the user cannot be found.
         }
+    
+        $user = $getUser->tokenable;
+    
+        if (!($user instanceof Teacher) || ($user->student_class_id !== $requestId)) {
+            return false;
+        }
+    
+        if ($user instanceof Admin && $user->username !== "admin") {
+            return false;
+        }
+    
+        return true;
     }
+    
 
 
 }

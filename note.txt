@@ -17,7 +17,6 @@
 //profile image
 
 
-
 //subject_score table
 //student_id, math, eng, civic
 

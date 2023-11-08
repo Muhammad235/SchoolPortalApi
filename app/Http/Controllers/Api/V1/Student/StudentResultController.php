@@ -8,7 +8,7 @@ use App\Traits\CheckAuthorize;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ResultResource;
-use Laravel\Sanctum\PersonalAccessToken;
+
 
 class StudentResultController extends Controller
 {
