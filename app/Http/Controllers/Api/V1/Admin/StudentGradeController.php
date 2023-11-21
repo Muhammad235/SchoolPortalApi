@@ -10,6 +10,30 @@ use Illuminate\Support\Facades\Validator;
 class StudentGradeController extends Controller
 {
 
+    public function index()
+    {
+        $studentClasses = StudentClass::all();
+
+        if ($studentClasses->isNotEmpty()) {
+            $data = $studentClasses->map(function ($studentClass) {
+                return [
+                    'id' => $studentClass->id,
+                    'grade' => $studentClass->grade,
+                ];
+            });
+        
+            return response()->json([
+                'data' => $data, 
+                'message' => 'Grade returned successfully'
+            ]);
+            
+        } else {
+            return response()->json([
+                'error' => 'Unable to process request, no classes found'
+            ]);
+        }        
+    }
+
     /**
      * store the specified resource.
      */
@@ -23,7 +47,10 @@ class StudentGradeController extends Controller
 
         if ($validator->fails()) {
 
-            return response()->json(['errors' => $validator->errors()], 400);
+
+            return response()->json([
+                'errors' => $validator->errors(),
+            ]);
 
         }
 

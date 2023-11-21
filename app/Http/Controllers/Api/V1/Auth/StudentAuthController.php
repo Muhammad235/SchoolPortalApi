@@ -68,6 +68,7 @@ class StudentAuthController extends Controller
     {
         Auth::user()->currentAccessToken()->delete();
         return response()->json([], 204);
+
     }
 
 }

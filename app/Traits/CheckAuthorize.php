@@ -39,6 +39,4 @@ trait CheckAuthorize{
         return true;
     }
     
-
-
 }

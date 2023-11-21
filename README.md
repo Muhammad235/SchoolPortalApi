@@ -139,8 +139,63 @@
 {
     "grade": "grade 1" | string
 }
-
 ```
+
+###  get all grades/classes
+
+> URL - http://127.0.0.1:8080/api/admin/grades
+
+>Method: GET
+
+````
+{
+    "data": [
+        {
+            "id": 1,
+            "grade": "grade 1"
+        },
+        {
+            "id": 2,
+            "grade": "grade 2"
+        },
+        {
+            "id": 3,
+            "grade": "grade 3"
+        },
+        {
+            "id": 4,
+            "grade": "grade 4"
+        },
+        {
+            "id": 5,
+            "grade": "grade 5"
+        },
+        {
+            "id": 6,
+            "grade": "grade 6"
+        },
+        {
+            "id": 7,
+            "grade": "grade 7"
+        },
+        {
+            "id": 8,
+            "grade": "grade 8"
+        },
+        {
+            "id": 9,
+            "grade": "grade 9"
+        },
+        {
+            "id": 10,
+            "grade": "grade 10"
+        }
+    ],
+    "message": "Grade returned successfully"
+}
+````
+
+
 ###  delete grade/class 
 
 > URL - http://127.0.0.1:8080/api/admin/grade{id}

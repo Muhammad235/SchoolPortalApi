@@ -30,12 +30,10 @@ class AdminAuthController extends Controller
 
     }
 
-    // public function logout()
-    // {
-    //     Auth::guard('student')->user()->currentAccessToken()->delete();
+    public function logout()
+    {
+        Auth::user()->currentAccessToken()->delete();
+        return response()->json([], 204);
 
-    //     return $this->success([
-    //         'message' => 'logged out successfully'
-    //     ]);
-    // }
+    }
 }

@@ -39,8 +39,9 @@ Route::prefix('admin')->group(function (){
         Route::apiResource('/students', Admin\StudentController::class)->only(['index', 'show', 'destroy']);
         Route::apiResource('/teachers', Admin\TeacherController::class)->only(['index', 'show', 'update', 'destroy']);
         Route::post('/teacher/{class_to_teach}', [TeacherAuthController::class, 'store']);
-        Route::apiResource('/grade', Admin\StudentGradeController::class)->only(['store', 'destroy']);
+        Route::apiResource('/grade', Admin\StudentGradeController::class)->only(['index', 'store', 'destroy']);
         Route::apiResource('/student/results', StudentResultController::class);
+        Route::post('logout', [AdminAuthController::class, 'logout']);
     });
 });
 
@@ -53,6 +54,7 @@ Route::prefix('teacher')->group(function (){
         Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
         Route::get('/students/{teacher:student_class_id}/{student}', [StudentController::class, 'show']);
         Route::put('/results/student/{student}', [UploadStudentResultController::class, 'update']);
+        Route::post('logout', [TeacherAuthController::class, 'logout']);
     });
 });
 
@@ -66,3 +68,5 @@ Route::prefix('portal')->group(function (){
         Route::post('logout', [StudentAuthController::class, 'logout']);
     });
 });
+
+Route::get('', [TeacherAuthController::class,'']);
