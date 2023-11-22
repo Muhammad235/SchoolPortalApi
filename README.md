@@ -480,7 +480,7 @@
 
 >Method: POST
 
-### login as admin
+### login as teacher
 ```
 {
     "email": "teacherxyz@gmail.com", | email, string
